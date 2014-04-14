@@ -1,0 +1,34 @@
+// Colors
+// -> Here is my awesome color selection, with PANTONE/PMS/CMYK codes in
+//    case some crazy person decides to showcase my website on a billboard
+//    the size of the Empire State Buiding.
+
+// PANTONE 125 C
+$white: white;
+$light: white;
+
+// PANTONE BLACK C
+$black: black;
+$dark: black;
+
+// PANTONE 7680 C
+$swatch: #553387;
+
+$black-10: darken(#fff, 10%);
+$black-20: darken(#fff, 20%);
+$black-30: darken(#fff, 30%);
+$black-40: darken(#fff, 40%);
+$black-50: darken(#fff, 50%);
+$black-60: darken(#fff, 60%);
+$black-70: darken(#fff, 70%);
+$black-80: darken(#fff, 80%);
+$black-90: darken(#fff, 90%);
+
+$gray: darken(#fff, 50%);
+
+$blue: #428bca;
+$green: #5cb85c;
+$yellow: #f0ad4e;
+$red:  #d9534f;
+$ltblue:    #5bc0de;
+$navy: #00006e;

@@ -1,0 +1,189 @@
+// Animations from various open source projects and some of my own.
+// -@ Mixin kudos to https://gist.github.com/Integralist/3931680
+
+@mixin keyframe ($animation_name) {
+  @-webkit-keyframes $animation_name {
+    @content;
+  }
+  @-moz-keyframes $animation_name {
+    @content;
+  }
+  @-o-keyframes $animation_name {
+    @content;
+  }
+  @keyframes $animation_name {
+    @content;
+  }
+}
+
+/*
+  Example usage: 
+  @include animation(10s, 5s, changecolour)
+ */
+
+@mixin animation ($animation, $duration, $delay) {
+  -webkit-animation-delay: $delay;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-name: $animation;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-delay: $delay;
+  -moz-animation-duration: $duration;
+  -moz-animation-name: $animation;
+  -moz-animation-fill-mode: forwards;
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-name: $animation;
+  animation-fill-mode: forwards;
+}
+
+@include keyframe(arrow-float) {
+  0% { transform: translateY(0%) rotate(45deg);  -webkit-transform: translateY(0%) rotate(45deg); }
+  50% { transform: translateY(10px) rotate(45deg);  -webkit-transform: translateY(10px) rotate(45deg); }
+  100% { transform: translateY(0%) rotate(45deg);  -webkit-transform: translateY(0%) rotate(45deg); }     
+}
+
+@include keyframe(float) {
+  0% { transform: translateY(0%);  -webkit-transform: translateY(0%); }
+  50% { transform: translateY(8%);  -webkit-transform: translateY(8%); }
+  100% { transform: translateY(0%);  -webkit-transform: translateY(0%); }     
+}
+
+@include keyframe(fade-in-top) {
+  0% { opacity: 0; transform: translateY(-100px); -webkit-transform: translateY(-100px) }
+  50% { opacity: 0; transform: translateY(-100px); -webkit-transform: translateY(-100px) }
+  100% { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0) }
+}
+
+@include keyframe(fade-in-bottom) {
+  0% { opacity: 0; transform: translateY(200px); -webkit-transform: translateY(200px) }
+  50% { opacity: 0; transform: translateY(200px); -webkit-transform: translateY(200px) }
+  100% { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0) }
+}
+
+@include keyframe(fade-in-bottom-scale) {
+  0% { opacity: 0; transform: translateY(20px) scale(0.7); -webkit-transform: translateY(200px) scale(0.7); }
+  50% { opacity: 0; transform: translateY(20px) scale(0.85); -webkit-transform: translateY(200px) scale(0.85); }
+  100% { opacity: 1; transform: translateY(0) scale(1); -webkit-transform: translateY(0) scale(1); }
+}
+
+@include keyframe(fade-in-left) {
+  0%{opacity:0; transform:translateX(-200px); -webkit-transform:translateX(-200px)}
+  100%{opacity:1; transform:translateX(0); -webkit-transform:translateX(0)}
+}
+
+@include keyframe(fade-in-right) {
+  0%{opacity:0; transform:translateX(200px); -webkit-transform:translateX(200px)}
+  100%{opacity:1; transform:translateX(0); -webkit-transform:translateX(0)}
+}
+
+@include keyframe(googlenow1) {
+  0% { transform:translateY(10rem)rotate(10deg); opacity: 0;}
+}
+
+@include keyframe(googlenow2) {
+  0% { transform:translateY(10rem)rotate(-10deg); opacity: 0; }
+}
+
+@include keyframe(heartbeat) {
+  0% { transform: scale(1); -webkit-transform: scale(1); text-shadow: 0 0 0px red;}
+  50% { transform: scale(1.5); -webkit-transform: scale(1.5);text-shadow: 0 0 15px red; }
+  100% { transform: scale(1); -webkit-transform: scale(1); text-shadow: 0 0 0px red; }
+}
+
+@include keyframe(inthetardis) {
+  0% {   -webkit-transform: skew(0,0) scale(1); transform: skew(0,0) scale(1); }
+  10% {  -webkit-transform: skew(0,0) scale(0.7); transform: skew(0,0) scale(0.7); }
+  80% {  -webkit-transform: skew(0,0) scale(0.7); transform: skew(0,0) scale(0.7); }
+  100% { -webkit-transform: skew(0,0) scale(1); transform: skew(0,0) scale(1); }
+}
+
+@include keyframe(shimmydown) {
+  0% {   -webkit-transform: translateY(0px); transform: translateY(0px); }
+  80% {   -webkit-transform: translateY(20px); transform: translateY(20px); }
+  100% { -webkit-transform: translateY(180px); transform: translateY(180px); }
+}
+
+@include keyframe(colors) {
+  0% {   background: #b35454; }
+  20% {  background: #9354b3; }
+  40% {  background: #547ab3; }
+  60% {  background: #54b398; }
+  80% {  background: #67b354; }
+  100% { background: #b35454; }
+}
+
+@include keyframe(radiance) {
+  0% {   text-shadow: 0 0 12px rgba(122, 210, 249, 0.9); }
+  20% {  text-shadow: 0 0 25px rgba(122, 210, 249, 0.8); }
+  40% {  text-shadow: 0 0 150px darken(rgb(122, 210, 249), 20%); }
+  60% {  text-shadow: 0 0 31px rgba(122, 210, 249, 0.8); }
+  80% {  text-shadow: 0 0 60px rgba(122, 210, 249, 1); }
+  100% { text-shadow: 0 0 12px rgba(122, 210, 249, 0.9); }
+}
+
+.margin-transition {
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  &:hover {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
+}
+
+.fade-in-top-transition {
+  -webkit-transform: translate(0,-20%);
+  -ms-transform: translate(0,-20%);
+  transform: translate(0,-20%);
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+.fade-in-top-transition-hover {
+  -webkit-transform: translate(0,0%);
+  -ms-transform: translate(0,0%);
+  transform: translate(0,0%);
+}
+
+.fade-in-right-transition {
+  -webkit-transform: translate(20%,0);
+  -ms-transform: translate(20%,0);
+  transform: translate(20%,0);
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+.fade-in-right-transition-hover {
+  -webkit-transform: translate(0,0%);
+  -ms-transform: translate(0,0%);
+  transform: translate(0,0%);
+}
+
+.fade-in-bottom-transition {
+  -webkit-transform: translate(0,20%);
+  -ms-transform: translate(0,20%);
+  transform: translate(0,20%);
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+.fade-in-bottom-transition-hover {
+  -webkit-transform: translate(0,0%);
+  -ms-transform: translate(0,0%);
+  transform: translate(0,0%);
+}
+
+.spinning-transition { 
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform-origin: center;
+  -webkit-transform-origin: center;
+}
+
+.spinning-transition-hover { 
+  opacity: 1;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

@@ -1,0 +1,195 @@
+// Requires Breakpoint
+@import "breakpoint";
+
+// Define row
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.col {
+  flex: 1;
+}
+
+.col-flexCells {
+  & > .col {
+    display: flex;
+  }
+}
+
+// Alignment methods
+.row-top {
+  align-items: flex-start;
+}
+
+.row-bottom {
+  align-items: flex-end;
+}
+
+.row-center {
+  align-items: center;
+}
+
+.col-top {
+  align-self: flex-start;
+}
+
+.col-bottom {
+  align-self: flex-end;
+}
+
+.col-center {
+  align-self: center;
+}
+
+// Grid Sizing
+@mixin grid-sizing($name: "") {
+  $sep: "-";
+  @if $name == "" {
+    $sep: "";
+  }
+  .#{$name}#{$sep}col-fit > .col {
+    flex: 1;
+  }
+  .#{$name}#{$sep}col-100 > .col {
+    flex: 0 0 100%;
+  }
+  .#{$name}#{$sep}col-50 > .col {
+    flex: 0 0 50%
+  }
+  .#{$name}#{$sep}col-33 > .col {
+    flex: 0 0 33.3333%
+  }
+  .#{$name}#{$sep}col-25 > .col {
+    flex: 0 0 25%
+  }
+}
+
+// Default grid-sizing modifiers
+@include grid-sizing();
+
+// ...for each breakpoint
+@each $breakpoint in $breakpoints {
+  $name: nth($breakpoint, 2);
+  @include breakpoint($name) {
+    @include grid-sizing($name);
+  }
+}
+
+@mixin grid-gutters($name: "") {
+  $sep: "-";
+  @if $name == "" {
+    $sep: "";
+  }
+  .#{$name}#{$sep}row-gutters {
+    margin-left: -1em;
+    & > .col {
+      padding-left: 1em;
+    }
+  }
+  .#{$name}#{$sep}row-guttersLarge {
+    margin-left: -1.5em;
+    & > .col {
+      padding-left: 1.5em;
+    }
+  }
+  .#{$name}#{$sep}row-gutters2x {
+    margin-left: -2em;
+    & > .col {
+      padding-left: 2em;
+    }
+  }
+  .#{$name}#{$sep}row-gutters3x {
+    margin-left: -3em;
+    & > .col {
+      padding-left: 3em;
+    }
+  }
+}
+
+// create the default grid-gutters modifiers
+@include grid-gutters();
+
+// create grid-gutters modifiers for each breakpoint
+@each $breakpoint in $breakpoints {
+  $name: nth($breakpoint, 2);
+  @include breakpoint($name) {
+    @include grid-gutters($name);
+  }
+}
+
+// Firefox workaround
+// https://bugzilla.mozilla.org/show_bug.cgi?id=702508
+@supports not (flex-wrap: wrap) {
+  .col-ffMultilineSupport {
+    display: block;
+    & > .col {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+  @mixin grid-sizing($name: "") {
+    $sep: "-";
+    @if $name == "" {
+      $sep: "";
+    }
+    .#{$name}#{$sep}col-100 {
+      display: block;
+      & > .col {
+        display: block;
+      }
+    }
+    .#{$name}#{$sep}col-100,
+    .#{$name}#{$sep}col-50,
+    .#{$name}#{$sep}col-33,
+    .#{$name}#{$sep}col-25 {
+      display: flex;
+    }
+  }
+  @include grid-sizing();
+  @each $breakpoint in $breakpoints {
+    $name: nth($breakpoint, 2);
+    @include breakpoint($name) {
+      @include grid-sizing($name);
+    }
+  }
+}
+
+@include breakpoint("large") {
+  .container-body {
+    flex-direction: row;
+    flex: 1;
+
+    /* IE10 tweener syntax */
+    -ms-flex-preferred-size: auto;
+  }
+  .container-content {
+    // flex: 1;
+    // the `flex` rule above should be applied but it's causing
+    // problems in IE10 and IE11. Not specifying a `flex` property
+    // and using the `-ms-flex` property here seems to make it
+    // work in all browsers for whatever reason
+    -ms-flex: 1 1 auto;
+
+    padding: 0 1.5em;
+    margin: 0;
+  }
+  .container-nav, .container-ads {
+    flex: 0 0 12em;
+  }
+}
+
+// Mobile friendly
+@media only screen and (max-width: $mobile) {
+  .row {
+    display: block;
+  }
+  .col {
+    min-width: 100%!important;
+    display: block;
+  }
+}
+

@@ -1,0 +1,31 @@
+// Basic Font Stacks
+$fonts: Arial, 'Myriad Pro', 'Lucida Grande', sans-serif;
+$serif: Georgia, serif;
+$monospace: 'Ubuntu Mono', 'Menlo', 'Consolas', 'Courier New', 'Ubuntu Mono', monospace;
+
+// Specific Font Stacs
+$abril: 'Abril Fatface', Impact, $serif;
+$bitter: 'Bitter', $fonts;
+$clear: 'Clear Sans', $fonts;
+$gentium: 'Gentium Book Basic', $serif;
+$helvetica: 'Helvetica Neue', Helvetica, $fonts;
+$opensans: 'Open Sans', $fonts;
+$museo: 'Museo Slab', $fonts;
+$kreon: 'Kreon', $serif;
+$reklame: ReklameScript, 'Bursh Script MT', $fonts;
+$satisfy: Satisfy, 'Bursh Script MT', $fonts;
+$tenso: Tenso, $serif;
+
+// Border Radius 
+$border-radius: 4px;
+
+// Font size
+$font-size: 18px;
+
+// Mobile viewports
+$mobile: 950px;
+$palm: 400px;
+
+// Containers
+$container-width: 960px;
+$container-gutter: 15px;

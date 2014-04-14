@@ -1,0 +1,585 @@
+@import "global/_normalize.scss";
+
+// Variables
+@import "global/_colors.scss";
+@import "_vars.scss";
+
+// Grid System
+@import "global/_grid-flexbox.scss";
+
+// Base
+@import "global/_base.scss";
+
+// Components
+@import "global/_scrollbars.scss";
+
+// Animations
+@import "global/_animations.scss";
+
+// Forms
+@import "global/_forms.scss";
+
+// Buttons
+@import "global/_buttons.scss";
+
+// Prettyprint
+@import "global/_prettyprint-monokai.scss";
+
+// Typography
+@import "global/_type.scss";
+// -> Bitter by Sol Matas
+// -@ http://www.fontsquirrel.com/fonts/bitter
+@import url(http://fonts.googleapis.com/css?family=Bitter:400,700);
+// -> Clear Sans by Intel
+// -@ https://01.org/clear-sans/
+@import url('../fonts/clear-sans/font.css');
+// -> Icon Font (Mostly Font Awesome and Iconic)
+@import url('../icons/style.css');
+
+// Prettyprint Code
+@import "global/_prettyprint-monokai.scss";
+
+// Modals
+@import "global/_modal.scss";
+
+// Long Shadows
+@import "global/_longshadows.scss";
+
+// Icons
+@import url('../icons/style.css');
+
+// Navigation
+// @import "global/_nav.scss";
+
+// Tooltips
+@import "global/_tooltips.scss";
+
+// Custom Styles
+::selection {
+  background: $red;
+}
+
+body, .standard, nav, footer {
+  // background: $blue;
+  // color: white;
+  font-size: 16px;
+  font-family: $clear;
+  font-weight: 300;
+}
+
+pre, code {
+  font-family: $monospace;
+}
+
+h1, h2, h3, h4, h5, .btn, .nav {
+  font-family: $bitter;
+  font-weight: 500;
+  text-align: inherit;
+}
+
+h4 {
+  margin-top: 1em;
+}
+
+section > h1 {
+  text-align: left;
+}
+
+header, section, article, footer {
+  position: relatve; width: 100%; overflow: hidden;
+  padding: 60px;
+  background-size: cover!important;
+  background-position: center; 
+}
+
+body.home {
+  background: #041033;
+  color: white;
+}
+
+a {
+  color: $blue;
+}
+
+p a, a.link {
+  border-bottom: 1px dotted;
+}
+
+// Mixins
+.transition {
+  transition: all .25s ease;
+  -webkit-transition: all .25s ease;
+}
+
+.button {
+  @extend .button-large;
+  border-radius: 6px;
+  margin-right: 0.2em;
+}
+
+.dark-text-shadow {
+  text-shadow: rgba(41, 52, 63, 0.4) 0px -1px 0px;
+}
+
+ul.details {
+    border-top: 1px dotted;
+    margin: 1em 2em;
+    li {
+        padding: .5em;
+        border-bottom: 1px dotted;
+    }
+}
+
+.white, .white a {
+    color: white;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+p {
+  line-height: 2em;
+}
+
+p a:hover, li a:hover {
+  border-bottom: 2px solid;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+blockquote {
+  padding: 8px 16px;
+  background: rgba(0,0,0,.1);
+  border-left: 4px solid rgba(0,0,0,.5);
+}
+
+.full {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 10em;
+  & > div {
+    margin-top: -100px;
+  }
+}
+
+// Components
+.arrow {
+  color: inherit;
+  width: 40px;
+  height: 40px;
+  border-right: 4px solid;
+  border-bottom: 4px solid;
+  border-radius: 1px;
+  position: absolute;
+  bottom: 80px;
+  margin-bottom: -2em;
+  left: 50%;
+  cursor: pointer;
+  margin-left: -20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  animation: arrow-float 2.5s infinite;
+  -webkit-animation: arrow-float 2.5s infinite;
+  @extend .transition;
+  &:before {
+    position: absolute;
+    content: 'SCROLL DOWN';
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    width: 180px;
+    left: -89px;
+    top: -10px;
+    opacity: 0.5;
+    @extend .transition;
+  }
+  &:hover {
+    opacity: 1;
+    &:before {
+      opacity: 1;
+    }
+    // &:after {
+    //   position: absolute;
+    //   content: 'TO READ MORE';
+    //   transform: rotate(-45deg);
+    //   -webkit-transform: rotate(-45deg);
+    // }
+  }
+}
+
+// Loading
+progress[data-status='empty'] { display: none; }
+progress[data-status='loading'] { display: block; }
+progress[data-status='done'] { display: none; }
+
+// Default Styles
+header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: $navy;
+  background-image: linear-gradient($green, $green, $green);
+  background-image: url(../images/congruent_pentagon.png);
+  box-shadow: inset 0 -10px 10px rgba(0,0,0,.5);
+  background-size: 50%!important;
+  background-repeat: repeat;
+  color: $black;
+  padding-top: 120px;
+  & > div {
+    position: relative;
+  }
+  p {
+    font-size: 22px;
+  }
+  &.title {
+    p {
+      font-size: 200%;
+      line-height: 1.2em;
+    }
+  }
+  &:not(.full) .arrow {
+    display: none;
+  }
+  &.full.white {
+    text-shadow: 0 0 6px black;
+  }
+}
+
+// Nav
+nav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  height: 75px;
+  text-align: right;
+  background: rgba(0,0,0,.5);
+  a {
+    padding: 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+  }
+}
+
+// Nav Links
+nav a {
+  &:hover {
+    border-bottom: none;
+    span {
+      // border-bottom: 2px solid;
+    }
+  }
+  &:before, &:after {
+    content: ' ';
+    position: absolute;
+    border-bottom: 3px solid;
+    bottom: 0;
+    width: 50%;
+    transition: all 0.1s ease;
+    opacity: 0;
+    -webkit-transform: translateY(10px);
+  }
+  &:before {
+    left: 4px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  &:after {
+    left: 50%;
+    right: 4px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  &:hover:before {
+    -webkit-transform: translateY(0px);
+    opacity: 1;
+  }
+  &:hover:after {
+    -webkit-transform: translateY(0px);
+    opacity: 1;
+  }
+  &:active:before, &.loading:before, &:focus:before{  
+    -webkit-transform: rotate(-25deg) translateY(0px);
+  }
+  &:active:after, &.loading:after, &:focus:after { 
+    -webkit-transform: rotate(25deg) translateY(0px);
+  }
+}
+
+.weather a {
+    color: white;
+}
+
+// Homepage
+.landing {
+  background-image: radial-gradient(circle at center,#255576,#132B3C 500px);
+  min-height: 300px; 
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  & > div {
+    @include animation(fade-in-top, 0.75s, 0s); 
+  }
+  h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 75px;
+  }
+  a.button {
+    @extend .button-jumbo;
+    margin-top: 20px;
+    &:last-of-type {
+      @include button-subtle($green);
+    }
+    &:first-of-type {
+      @include button-subtle($blue);
+      // @include button-subtle(rgba(0,0,0,0));
+      // border: 1px solid white;
+    }
+  }
+}
+
+.logo-large {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 80px;
+  @extend .hidden-mobile;
+  .box {
+    color: inherit;
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    border-top: 4px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-bottom: 4px solid;
+    border-radius: 1px;
+    margin-top: -80px;
+    cursor: pointer;
+    transform: rotateX(45deg) rotateZ(45deg);
+    -webkit-transform: rotateX(45deg) rotateZ(45deg);
+    @extend .transition;
+  }
+  &:hover {
+    .box {
+      transform: rotateX(-45deg) rotateZ(10deg);
+      -webkit-transform: rotateX(-45deg) rotateZ(10deg);
+    }
+  }
+}
+
+.tiles {
+  background: $gray;
+  padding: 10px;
+  .col {
+    text-align: center;
+    color: black;
+    min-width: 33%;
+    padding: 10px;
+  }
+  figure, figcaption {
+    padding: 5px;
+    @extend .transition;
+  }
+  .col:hover figure, .col:hover figcaption {
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+  }
+  figure {
+    position: relative;
+    height: 200px;
+    background-position: center;
+    background-size: cover!important;
+    background: gray;
+    span.category {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      padding: .25em .5em;
+      background: rgba(0,0,0,.25);
+      color: white;
+      border-bottom-left-radius: 8px;
+    }
+  }
+  figcaption {
+    text-align: left;
+    padding: 1.75em 2.15em 2.95em;
+    background: $white;
+    color: black;
+    strong {
+      font-weight: normal;
+      display: block;
+      font-size: 26px;
+      line-height: 1.1em;
+      margin-bottom: 10px;
+    }
+  }
+  .col:hover figcaption {
+    color: inherit;
+  }
+}
+
+// Article Components
+figure.col-svg {
+  width: 256px;
+  text-align: center;
+  min-height: 256px;
+}
+.lazy-line {
+  @extend .hidden-mobile;
+  min-height: 256px;
+  min-width: 256px;
+  margin: auto;
+}
+
+// Credit
+#credit {
+  background: #d9392d;
+  color: white;
+  a {
+    color: white;
+  }
+  .avatar {
+    height: 3.5em;
+    width: 3.5em;
+    border-radius: 5px;
+    margin-right: .5em;
+  }
+  h4[data-clipboard] {
+    cursor: pointer;
+    &:after {
+      content: 'Copy';
+      font-size: 50%;
+      display: inline-block;
+      border: 1px solid;
+      line-height: 1em;
+      padding: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+}
+#cite {
+  background: rgba(0,0,0,.5);
+  color: white;
+  border: none;
+  font-size: 12px;
+  display: block;
+  padding: 8px;
+  width: 90%;
+  font-size: inherit;
+  height: 5em;
+}
+
+// Comments
+#comments {
+  background: white;
+  .container {
+    max-width: 800px;
+  }
+}
+
+// Footer
+footer {
+  background: linear-gradient(rgb(46, 49, 55), rgb(62, 65, 72));
+  color: white;
+  vertical-align: top;
+  a {
+      color: white;
+  }
+  .right {
+    @include button-border(white);
+    &:hover {
+      color: black;
+      border-bottom-color: white;
+    }
+  }
+  a:not(.right) i {
+    font-size: 80%;
+  }
+  .links a {
+    display: inline;
+    margin: 0 6px 12px 0;
+  }
+}
+
+// Mobile friendly
+@media (max-width: $mobile) {
+  header, section, article, footer {
+    padding: 10px;
+  }
+  nav {
+    display: block;
+    background: white;
+    position: relative!important;
+    height: auto; 
+    li h1 {
+      background: none;
+      a {
+        color: $blue!important;
+      }
+    }
+    menu {
+      display: flex;
+    }
+    menu li {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      a {
+        display: block;
+        color: $blue;
+      }
+      &.right {
+        float: initial;
+      }
+      i {
+        font-size: 200%;
+        display: block;
+      }
+    }
+  }
+  .container {
+    margin: 0px;
+  }
+  header p {
+    font-size: 18px!important;
+  }
+  .arrow:before {
+    display: none;
+  }
+  footer {
+    text-align: center;
+    .right {
+      float: none;
+      display: block;
+      width: 100%;
+    }
+  }
+  .tiles {
+    figure {
+      display: none;
+    }
+    figcaption {
+      min-height: 0px;
+      height: auto;
+      border-bottom: 1px solid white;
+    }
+  }
+  .hidden-mobile {
+    display: none!important;
+  }
+}
+
