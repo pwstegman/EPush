@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^(?!www\.)([^.]+)\.epush\.net$ [NC]
+RewriteCond %{REQUEST_URI}::%1 !^/([^/]+).*?::\1
+RewriteRule ^(.*)$ /%1/$1 [L]
