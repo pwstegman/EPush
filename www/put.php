@@ -26,8 +26,15 @@
     
     if(strtolower($subject) == "set me up"){
         $bossarray=array("name"=>$from);
-        $c_users->insert($bossarray);
-        $x = $bossarray['_id'];
+        $x;
+        if($c_users->find($bossarray)->count() == 0){
+	        $c_users->insert($bossarray);
+	        $x = $bossarray['_id'];
+        }
+        else{
+        	$x = $c_users->findOne($bossarray)['_id'];
+        }
+        
         $sendgrid = new SendGrid('[USERNAME]', '[PASSWORD]');
         
         
