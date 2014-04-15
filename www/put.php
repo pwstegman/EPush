@@ -77,7 +77,7 @@
                         mkdir ("./uploads/" . substr(md5($x),0,5) . "/", 0744);
 			}
         
-    else if(strtolower($subject) == "help"){
+    }else if(strtolower($subject) == "help"){
     	
         $sendgrid = new SendGrid('[USERNAME]', '[PASSWORD]');
         
