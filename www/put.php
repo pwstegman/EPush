@@ -2,21 +2,21 @@
     
     header("Status: 200");
     
-	//get variables
-	
-	// Configuration
-	$dbhost = 'localhost';
-	$dbname = 'test';
+    //get variables
+    
+    // Configuration
+    $dbhost = 'localhost';
+    $dbname = 'test';
 
-	// Connect to test database
-	$m = new Mongo("mongodb://$dbhost");
-	$db = $m->$dbname;
+    // Connect to test database
+    $m = new Mongo("mongodb://$dbhost");
+    $db = $m->$dbname;
 
-	// Get the users collection
-	$c_users = $db->users;
-	
-	require("sendgrid-php.php");
-	
+    // Get the users collection
+    $c_users = $db->users;
+    
+    require("sendgrid-php.php");
+    
     $to = $_POST["to"];
     $from = $_POST["from"];
     $body = $_POST["text"];
@@ -28,11 +28,11 @@
         $bossarray=array("name"=>$from);
         $x;
         if($c_users->find($bossarray)->count() == 0){
-	        $c_users->insert($bossarray);
-	        $x = $bossarray['_id'];
+            $c_users->insert($bossarray);
+            $x = $bossarray['_id'];
         }
         else{
-        	$x = $c_users->findOne($bossarray)['_id'];
+            $x = $c_users->findOne($bossarray)['_id'];
         }
         
         $sendgrid = new SendGrid('[USERNAME]', '[PASSWORD]');
@@ -43,46 +43,46 @@
        setFrom("support@e2d.bymail.in")->
        setSubject('Verification code')->
        setText('Hello, please paste this verification code somewhere in the body of any deploy emails: ' . $x . ' This is your 5 character access code:' . substr(md5($x),0,5) . ' Click on the "My Files" tab on (domainname) to access your website files.')->
-       //setHtml('<h1>Welcome to Email2Deploy</h1><p>Please paste this verification code somewhere in the body of any deploy emails:</p><blockquote>' . $x . '</blockquote><p>This is your 5 character access code:</p><blockquote>' . substr(md5($x),0,5) . '</blockquote><p>Click on the "My Files" tab on (domainname) to access your website files.</p>');
+       //setHtml('<h1>Welcome to EPush</h1><p>Please paste this verification code somewhere in the body of any deploy emails:</p><blockquote>' . $x . '</blockquote><p>This is your 5 character access code:</p><blockquote>' . substr(md5($x),0,5) . '</blockquote><p>Click on the "My Files" tab on (domainname) to access your website files.</p>');
         setHtml('<table style="border: none; width: 100%; font-family: Arial; vertical-align: middle; text-align: center; background: white;">
-	<tbody>
-	<tr style="background:#3C8E77; height: 150px;"><td>
-		<h1 style="color: white; line-height: 1em;">Welcome to Email2Deploy</h1>
-	</td></tr>
-	<tr style="height: 4em;"><td>
-		<p>Please paste this verification code somewhere in the body of any deploy emails:</p>
-	</td></tr>
-	<tr style="height: 3em;"><td>
-		<code style="font-family: monospace; font-size: 120%; background: lightGray; border-radius: 4px; padding: 6px; border: 1px solid gray;">' . $x . '</code>
-	</td></tr>
-	<tr style="height: 3em;"><td>
-		<p>This is your 5 character access code:</p>
-	</td></tr>
-	<tr style="height: 3em;"><td>
-		<code style="font-family: monospace; font-size: 120%; background: lightGray; border-radius: 4px; padding: 6px; border: 1px solid gray;">' . substr(md5($x),0,5) . '</code>
-	</td></tr>
-	<tr style="height: 4em;"><td>
-		<p>Enter your 5 character access code on epush.net to access your website</p>
-	</td></tr>
-		<tr style="height: 5em;"><td>
-		<a href="epush.net" style="line-height: 5em; display: block; background: #F9D980; color: black; font-weight: bold;">Click here to open EPush</a>
-	</td></tr>
-	</tbody>
-	</table>');
+    <tbody>
+    <tr style="background:#3C8E77; height: 150px;"><td>
+        <h1 style="color: white; line-height: 1em;">Welcome to EPush</h1>
+    </td></tr>
+    <tr style="height: 4em;"><td>
+        <p>Please paste this verification code somewhere in the body of any deploy emails:</p>
+    </td></tr>
+    <tr style="height: 3em;"><td>
+        <code style="font-family: monospace; font-size: 120%; background: lightGray; border-radius: 4px; padding: 6px; border: 1px solid gray;">' . $x . '</code>
+    </td></tr>
+    <tr style="height: 3em;"><td>
+        <p>This is your 5 character access code:</p>
+    </td></tr>
+    <tr style="height: 3em;"><td>
+        <code style="font-family: monospace; font-size: 120%; background: lightGray; border-radius: 4px; padding: 6px; border: 1px solid gray;">' . substr(md5($x),0,5) . '</code>
+    </td></tr>
+    <tr style="height: 4em;"><td>
+        <p>Enter your 5 character access code on epush.net to access your website</p>
+    </td></tr>
+        <tr style="height: 5em;"><td>
+        <a href="epush.net" style="line-height: 5em; display: block; background: #F9D980; color: black; font-weight: bold;">Click here to open EPush</a>
+    </td></tr>
+    </tbody>
+    </table>');
         
         
         $sendgrid->send($mail);
         
         if (!file_exists ( "./uploads/" . substr(md5($x),0,5) . "/" )) {
                         mkdir ("./uploads/" . substr(md5($x),0,5) . "/", 0744);
-			}
+            }
         
     }else if(strtolower($subject) == "help"){
-    	
+        
         $sendgrid = new SendGrid('[USERNAME]', '[PASSWORD]');
         
         $helpStr = '<table style="border: none; width: 100%; font-family: Arial; vertical-align: middle; text-align: center; background: white;"><tbody><tr style="background:#3C8E77; height: 150px;"><td><h1 style="color: white; line-height: 1em;">Help</h1></td></tr><tr><td><h2>Getting Started</h2><p>Send an email to this address saying <code>Set me up</code></p><p>In a few seconds, you will get an email with your verification info along with your app url.</p></td></tr><hr><tr><td><h2>Doing Stuff</h2><p>To upload files, send an email to this email.</p><p>All you need in the body is your verification code.</p><p>Attach whatever files you want. <code>.zip</code> files will automatically unzip!</p></td></tr><hr><tr><td><h2>Git Repos!</h2><p>To clone a git repo, send an email to this email.</p><p>Your body should consist of <code>[Verification Code] [Github Repo URL]</code></p><p>You should see your repo uploaded there in a bit!</p></td></tr></tbody></table>';
-	
+    
         $mail = new SendGrid\Email();
         $mail->addTo(json_decode($_POST['envelope'])->{'from'})->
         setFrom("help@e2d.bymail.in")->setSubject('Help')->setText(trim(preg_replace('/<[^>]*>/', '', $helpStr)))->setHtml($helpStr);
@@ -90,7 +90,7 @@
         $sendgrid->send($mail);   
         
     }else{
-    	
+        
         $coll = $c_users->findOne(array("name"=>$from));
         if($coll !== null){
             $x = (string)$coll["_id"];
@@ -122,12 +122,12 @@
                     $uploadName = "attachment1";
                     $x = substr(md5($x),0,5);
                     for($i=0;$i<$num_attachments;$i++){
-			if (!file_exists ( "./uploads/" . $x . "/" )) {
+            if (!file_exists ( "./uploads/" . $x . "/" )) {
                         mkdir ("./uploads/" . $x . "/", 0744);
-			}
-			move_uploaded_file($_FILES[$uploadName] ['tmp_name'],"./uploads/" . $x . "/{$_FILES[$uploadName] ['name']}");
-			            if(substr($_FILES[$uploadName] ['name'],strlen($_FILES[$uploadName] ['name'])-4,4) == ".zip"){
-			                $zip = new ZipArchive;
+            }
+            move_uploaded_file($_FILES[$uploadName] ['tmp_name'],"./uploads/" . $x . "/{$_FILES[$uploadName] ['name']}");
+                        if(substr($_FILES[$uploadName] ['name'],strlen($_FILES[$uploadName] ['name'])-4,4) == ".zip"){
+                            $zip = new ZipArchive;
                             $res = $zip->open("./uploads/" . $x . "/" . $_FILES[$uploadName] ['name']);
                             if ($res === TRUE) {
                                 if (!file_exists ( "./uploads/" . $x . "/" . substr($_FILES[$uploadName] ['name'],0,strlen($_FILES[$uploadName] ['name'])-4) )) {
@@ -138,7 +138,7 @@
                             }else{
                                 file_put_contents("./uploads/" . $x . "/unabletounzip.txt","There was an error unzipping your .zip  Please make sure it was valid and not corrupt.");
                             }
-			            }
+                        }
                         $uploadName++;
                     }
                 }else{
@@ -175,7 +175,7 @@ $params = array(
     'api_key'   => $pass,
     'x-smtpapi' => json_encode($json_string),
     'to'        => $from,
-    'subject'   => 'Welcome from Email2Deploy ',
+    'subject'   => 'Welcome from EPush ',
     'html'      => 'Hello, please paste this verification code somewhere in the body of any deploy emails: ' . $x,
     'text'      => 'Hello, please paste this verification code somewhere in the body of any deploy emails: ' . $x,
     'from'      => $to
