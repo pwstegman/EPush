@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col" style="max-width: 33%;">
                 <h3>Step 1</h3>
-                <p>Send an email with 'Set Me Up' as the subject to setup@e2d.bymail.in
+                <p>Send an email with 'Set Me Up' as the subject to <b>setup@e2d.bymail.in</b>
                     <br>
                 </p>
                 <img src="images/emailstep.svg" height=100 width=100 class="floating" />
