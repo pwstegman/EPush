@@ -81,40 +81,13 @@
     	
         $sendgrid = new SendGrid('[USERNAME]', '[PASSWORD]');
         
-        $helpStr = '
-        <table style="border: none; width: 100%; font-family: Arial; vertical-align: middle; text-align: center; background: white;">
-	<tbody>
-	<tr style="background:#3C8E77; height: 150px;"><td>
-		<h1 style="color: white; line-height: 1em;">Help</h1>
-	</td></tr>
-	<tr><td>
-		<h2>Getting Started</h2>
-		<p>Send an email to this address saing <code>Set me up</code></p>
-		<p>In a few seconds, you will get an email with your verification info along with your app url.</p>
-	</td></tr>
-	<hr>	
-	<tr><td>
-		<h2>Doing Stuff</h2>
-		<p>To upload files, send an email to this email.</p>
-		<p>All you need in the body is your verification code.</p>
-		<p>Attach whatever files you want. <code>.zip</code> files will automatically unzip!</p>
-	</td></tr>		
-	<hr>	
-	<tr><td>
-		<h2>Git Repos!</h2>
-		<p>To clone a git repo, send an email to this email.</p>
-		<p>Your body should consist of <code>[Verification Code] [Github Repo URL]</code></p>
-		<p>You should see your repo uploaded there in a bit!</p>
-	</td></tr>		
-	
-	</tbody>
-	</table>';
+        $helpStr = '<table style="border: none; width: 100%; font-family: Arial; vertical-align: middle; text-align: center; background: white;"><tbody><tr style="background:#3C8E77; height: 150px;"><td><h1 style="color: white; line-height: 1em;">Help</h1></td></tr><tr><td><h2>Getting Started</h2><p>Send an email to this address saing <code>Set me up</code></p><p>In a few seconds, you will get an email with your verification info along with your app url.</p></td></tr><hr><tr><td><h2>Doing Stuff</h2><p>To upload files, send an email to this email.</p><p>All you need in the body is your verification code.</p><p>Attach whatever files you want. <code>.zip</code> files will automatically unzip!</p></td></tr><hr><tr><td><h2>Git Repos!</h2><p>To clone a git repo, send an email to this email.</p><p>Your body should consist of <code>[Verification Code] [Github Repo URL]</code></p><p>You should see your repo uploaded there in a bit!</p></td></tr></tbody></table>';
 	
         $mail = new SendGrid\Email();
         $mail->addTo(json_decode($_POST['envelope'])->{'from'})->
-        setFrom("help@e2d.bymail.in")->setSubject('Help')->setText($helpStr)->setHtml($helpStr);
+        setFrom("help@e2d.bymail.in")->setSubject('Help')->setText(trim(preg_replace('/<[^>]*>/', '', $helpStr)))->setHtml($helpStr);
         
-        $sendgrid->send($mail);    	
+        $sendgrid->send($mail);   
         
     }else{
     	
