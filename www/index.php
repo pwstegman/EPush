@@ -69,7 +69,7 @@
             </div>
             <div class="col" style="max-width: 33%;">
                 <h3>Step 3</h3>
-                <p>Your done! Your website will be up at the URL sent in the verification email!
+                <p>You're done! Your website will be up at the URL sent in the verification email!
                     <br>You are live.</p>
                 <img src="images/livestep.svg" height=100 width=100 class="floating" />
 
