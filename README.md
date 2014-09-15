@@ -12,7 +12,7 @@ The HackRu EPush team:
 ----------------------------
 ####Matthew Kaufer https://github.com/mjkaufer/
 ####Victor Lourng https://github.com/LabLayers
-####Sashank Thupukari https://github.com/sthupukari
+####Sashank Thupukari https://github.com/helloworld
 ####Myself https://github.com/pwstegman
 
 ###Possibly working live demo: http://epush.net/
